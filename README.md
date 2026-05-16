@@ -1,4 +1,4 @@
-# Continual RAG Agent - Banking Credit Analysis
+# PolicySync - Banking Credit Analysis
 
 A real-time Retrieval-Augmented Generation system for banking credit analysis with continual learning capabilities. This system addresses six critical failure modes in production RAG systems through incremental indexing, dual-path retrieval, intelligent re-ranking, retention testing, and drift monitoring.
 
@@ -31,7 +31,7 @@ A real-time Retrieval-Augmented Generation system for banking credit analysis wi
 ## 📁 Project Structure
 
 ```
-continual-rag-agent/
+policysync/
 ├── backend/
 │   ├── main.py              ← FastAPI app with 7 endpoints
 │   ├── ingestion.py         ← Chunking, embedding, indexing
@@ -88,8 +88,8 @@ continual-rag-agent/
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/continual-rag-agent.git
-cd continual-rag-agent
+git clone https://github.com/yourusername/policysync.git
+cd policysync
 ```
 
 2. **Set up Groq API key**

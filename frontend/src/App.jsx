@@ -40,7 +40,7 @@ function App() {
     <div className="app">
       <header className="header">
         <div className="header-content">
-          <h1>Continual RAG Agent</h1>
+          <h1>PolicySync</h1>
           <p>Banking Credit Analysis System</p>
           <div className={`status-indicator ${systemStatus.status}`}>
             {systemStatus.message}
