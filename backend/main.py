@@ -3,13 +3,14 @@ FastAPI backend for Continual RAG Agent - Banking Credit Analysis
 """
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import json
 import os
 from datetime import datetime
 import logging
-from ingestion import initialize_db, ingest_document
+from ingestion import initialize_db, ingest_document, get_or_create_table
 from retriever import dual_path_retrieve, rerank_results
 from evaluator import run_retention_tests, get_drift_logs
 from cron_fetcher import fetch_and_ingest_new_documents
@@ -19,11 +20,60 @@ from apscheduler.schedulers.background import BackgroundScheduler
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Initialize FastAPI app
+# Global state
+db = None
+scheduler = None
+last_fetch_time = None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifecycle manager for startup and shutdown events"""
+    global db, scheduler, last_fetch_time
+    
+    # --- STARTUP LOGIC ---
+    logger.info("Starting up PolicySync...")
+    
+    # Initialize LanceDB
+    db = initialize_db()
+    logger.info("LanceDB initialized")
+    
+    # Initialize scheduler
+    scheduler = BackgroundScheduler()
+    scheduler.start()
+    
+    # Schedule data fetcher to run every 8 hours
+    scheduler.add_job(
+        fetch_and_ingest_new_documents,
+        "interval",
+        hours=8,
+        id="rbi_fetcher"
+    )
+    
+    # Fetch initial data on startup
+    logger.info("Fetching initial RBI data...")
+    try:
+        fetch_and_ingest_new_documents()
+        last_fetch_time = datetime.now().isoformat()
+        logger.info("Initial data fetched successfully")
+    except Exception as e:
+        logger.error(f"Error fetching initial data: {e}")
+    
+    logger.info("Startup complete")
+    
+    yield  # Application runs during this yield
+    
+    # --- SHUTDOWN LOGIC ---
+    if scheduler:
+        scheduler.shutdown()
+        logger.info("Scheduler shutdown")
+
+
+# Initialize FastAPI app with the new lifespan manager
 app = FastAPI(
     title="Continual RAG Agent API",
     description="Banking credit analysis with continual learning",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # CORS configuration
@@ -65,52 +115,6 @@ class RetentionResult(BaseModel):
     baseline_answer: str
     current_answer: str
 
-# Global state
-db = None
-scheduler = None
-last_fetch_time = None
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize database, scheduler, and fetch initial data"""
-    global db, scheduler, last_fetch_time
-    
-    logger.info("Starting up Continual RAG Agent...")
-    
-    # Initialize ChromaDB
-    db = initialize_db()
-    logger.info("ChromaDB initialized")
-    
-    # Initialize scheduler
-    scheduler = BackgroundScheduler()
-    scheduler.start()
-    
-    # Schedule data fetcher to run every 8 hours
-    scheduler.add_job(
-        fetch_and_ingest_new_documents,
-        "interval",
-        hours=8,
-        id="rbi_fetcher"
-    )
-    
-    # Fetch initial data on startup
-    logger.info("Fetching initial RBI data...")
-    try:
-        fetch_and_ingest_new_documents()
-        last_fetch_time = datetime.now().isoformat()
-        logger.info("Initial data fetched successfully")
-    except Exception as e:
-        logger.error(f"Error fetching initial data: {e}")
-    
-    logger.info("Startup complete")
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Cleanup scheduler"""
-    global scheduler
-    if scheduler:
-        scheduler.shutdown()
-        logger.info("Scheduler shutdown")
 
 @app.get("/health")
 async def health_check():
@@ -212,8 +216,8 @@ async def status_endpoint():
         if not db:
             raise HTTPException(status_code=503, detail="Database not initialized")
         
-        active_count = db.get_or_create_collection("active_index").count()
-        archive_count = db.get_or_create_collection("archive_index").count()
+        active_count = get_or_create_table(db, "active_index").count_rows()
+        archive_count = get_or_create_table(db, "archive_index").count_rows()
         
         return StatusResponse(
             active_docs=active_count,

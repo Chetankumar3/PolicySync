@@ -1,13 +1,17 @@
 .query-panel h2 {
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #1e293b;
+  font-size: 1.75rem;
+  font-weight: 700;
 }
 
 .query-form {
-  background: #f9f9f9;
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 2rem;
+  border-radius: 16px;
   margin-bottom: 2rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .form-group {
@@ -16,26 +20,28 @@
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-weight: 600;
-  color: #333;
+  color: #334155;
+  font-size: 0.95rem;
 }
 
 .form-group textarea {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 6px;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
   font-family: inherit;
   font-size: 1rem;
   resize: vertical;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  background: white;
 }
 
 .form-group textarea:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
 .form-group textarea:disabled {
@@ -44,20 +50,21 @@
 }
 
 .submit-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
   color: white;
   border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 6px;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
 }
 
 .submit-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
 .submit-button:disabled {
@@ -70,22 +77,24 @@
 }
 
 .answer-section {
-  background: #f0f4ff;
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  padding: 2rem;
+  border-radius: 16px;
   margin-bottom: 2rem;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
 .answer-section h3 {
-  color: #333;
+  color: #1e40af;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .answer-text {
   font-size: 1.05rem;
   line-height: 1.8;
-  color: #333;
+  color: #1e293b;
   margin-bottom: 1rem;
 }
 
@@ -97,8 +106,9 @@
 }
 
 .sources-section h3 {
-  color: #333;
+  color: #1e293b;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .sources-list {
@@ -108,25 +118,28 @@
 }
 
 .source-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
   background: white;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .source-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-4px);
 }
 
 .source-card.active_index {
-  border-left: 4px solid #4CAF50;
+  border-left: 4px solid #10b981;
+  border-color: #10b981;
 }
 
 .source-card.archive_index {
-  border-left: 4px solid #FF9800;
-  background: #fffbf0;
+  border-left: 4px solid #f59e0b;
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
 }
 
 .source-header {
@@ -137,9 +150,10 @@
 }
 
 .source-header h4 {
-  color: #333;
+  color: #1e293b;
   font-size: 1rem;
   flex: 1;
+  font-weight: 600;
 }
 
 .collection-badge {
@@ -151,13 +165,13 @@
 }
 
 .collection-badge.active_index {
-  background: #c8e6c9;
-  color: #2e7d32;
+  background: #d1fae5;
+  color: #059669;
 }
 
 .collection-badge.archive_index {
-  background: #ffe0b2;
-  color: #e65100;
+  background: #fef3c7;
+  color: #d97706;
 }
 
 .source-date {
@@ -175,7 +189,7 @@
 
 .source-score {
   text-align: right;
-  color: #667eea;
+  color: #3b82f6;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
 }

@@ -2,7 +2,7 @@
 
 ## For GitHub Reviewers
 
-This document provides step-by-step instructions to run the Continual RAG Agent on your local machine.
+This document provides step-by-step instructions to run PolicySync on your local machine.
 
 ## System Requirements
 
@@ -21,8 +21,8 @@ This document provides step-by-step instructions to run the Continual RAG Agent 
 ## Step 2: Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/continual-rag-agent.git
-cd continual-rag-agent
+git clone https://github.com/yourusername/policysync.git
+cd policysync
 ```
 
 ## Step 3: Backend Setup
@@ -55,8 +55,8 @@ python main.py
 You should see:
 ```
 INFO:     Uvicorn running on http://0.0.0.0:8000
-INFO:     Starting up Continual RAG Agent...
-INFO:     ChromaDB initialized
+INFO:     Starting up PolicySync...
+INFO:     LanceDB initialized
 INFO:     Starting background scheduler
 INFO:     Fetching initial RBI data...
 ```
@@ -106,11 +106,11 @@ Visit: http://localhost:5173/
 
 ## Troubleshooting
 
-### Issue: `ModuleNotFoundError: No module named 'chromadb'`
+### Issue: `ModuleNotFoundError: No module named 'lancedb'`
 
 **Solution**:
 ```bash
-pip install chromadb==0.4.18
+pip install lancedb
 ```
 
 ### Issue: GROQ_API_KEY not recognized
@@ -151,12 +151,12 @@ npm cache clean --force
 npm install
 ```
 
-### Issue: `chromadb` database is locked
+### Issue: `LanceDB` database is locked
 
 **Solution**:
 ```bash
 # Delete the database and restart
-rm -rf backend/chroma_store/
+rm -rf backend/lancedb_store/
 
 # Restart backend
 python main.py
@@ -229,8 +229,8 @@ CMD ["python", "backend/main.py"]
 
 ### Build and Run
 ```bash
-docker build -t continual-rag-agent .
-docker run -e GROQ_API_KEY=your_key -p 8000:8000 -p 3000:3000 continual-rag-agent
+docker build -t policysync .
+docker run -e GROQ_API_KEY=your_key -p 8000:8000 -p 3000:3000 policysync
 ```
 
 ## Production Deployment
@@ -259,19 +259,19 @@ zappa deploy production
 
 ### Logs Location
 - Backend logs: stdout/stderr
-- ChromaDB logs: `./backend/chroma_store/`
+- LanceDB logs: `./backend/lancedb_store/`
 - Fetch logs: Check console output
 
-### Check ChromaDB Size
+### Check LanceDB Size
 ```bash
-du -sh backend/chroma_store/
+du -sh backend/lancedb_store/
 ```
 
 ## Resetting the System
 
 ### Clear All Data
 ```bash
-rm -rf backend/chroma_store/
+rm -rf backend/lancedb_store/
 rm backend/fetched_urls.json
 ```
 
@@ -280,7 +280,7 @@ rm backend/fetched_urls.json
 # Terminal 1: Stop backend (Ctrl+C)
 # Terminal 2: Stop frontend (Ctrl+C)
 
-rm -rf backend/chroma_store/
+rm -rf backend/lancedb_store/
 python backend/main.py
 ```
 

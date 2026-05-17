@@ -19,7 +19,7 @@ RBI_URLS = {
     "press_releases": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx"
 }
 
-FETCHED_URLS_FILE = "./chroma_store/fetched_urls.json"
+FETCHED_URLS_FILE = "./lancedb_store/fetched_urls.json"
 
 def load_fetched_urls() -> Dict[str, set]:
     """Load set of already-fetched URLs from JSON file"""

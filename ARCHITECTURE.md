@@ -1,8 +1,8 @@
-# Continual RAG Agent - Technical Architecture
+# PolicySync - Technical Architecture
 
 ## System Overview
 
-The Continual RAG Agent is a production-ready system that addresses critical failure modes in traditional RAG systems through a multi-layered architecture combining incremental indexing, dual-path retrieval, intelligent re-ranking, and continuous monitoring.
+PolicySync is a production-ready system that addresses critical failure modes in traditional RAG systems through a multi-layered architecture combining incremental indexing, dual-path retrieval, intelligent re-ranking, and continuous monitoring.
 
 ## Architectural Diagram
 
@@ -30,12 +30,12 @@ The Continual RAG Agent is a production-ready system that addresses critical fai
             │ ┌───────────────┼────────────────┤
             │ │               │                │
     ┌───────▼─────────────────▼────────────────▼─────┐
-    │    ChromaDB Vector Database                    │
+    │    LanceDB Vector Database                    │
     │  ┌──────────────────┬──────────────────────┐   │
     │  │  active_index    │   archive_index      │   │
     │  │  (current docs)  │   (historical docs)  │   │
     │  └──────────────────┴──────────────────────┘   │
-    │  Persistent Storage: ./chroma_store/          │
+    │  Persistent Storage: ./lancedb_store/          │
     └────────────────────────────────────────────────┘
             │                 │
             │                 └─ Chunked documents with metadata
@@ -70,7 +70,7 @@ Embedding (all-MiniLM-L6-v2)
     ↓
 Duplicate Check (hash-based ID)
     ↓
-Upsert to ChromaDB active_index
+Insert to LanceDB active_index
     ↓
 Store Metadata (source, date, URL)
 ```
@@ -285,7 +285,7 @@ app.add_middleware(
 
 ## Data Structures
 
-### ChromaDB Collections
+### LanceDB Tables
 
 **active_index**:
 ```json
@@ -358,13 +358,13 @@ Same structure, but contains superseded or historical documents.
 - Archive strategy: Move docs >1 year old to archive
 
 ### For 100 Concurrent Users
-- Connection pooling for ChromaDB
+- Connection pooling for LanceDB
 - Query caching for retention/drift endpoints
 - Load balance multiple backend instances
 
 ### For Real-Time Ingestion
 - Message queue (Kafka/RabbitMQ) for document jobs
-- Async upserts to ChromaDB
+- Async inserts to LanceDB
 - Webhook notifications when conflicts detected
 
 ## Security Considerations
@@ -417,5 +417,5 @@ def fetch_rbi_data():
 - **Catastrophic Forgetting**: Rusu et al., "Continual Learning Through Synaptic Intelligence"
 - **Retrieval-Augmented Generation**: Lewis et al., "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
 - **Distribution Shift**: Moreno-Torres et al., "A unifying view on dataset shift in classification"
-- **ChromaDB Architecture**: Open-source vector database with persistence
+- **LanceDB Architecture**: Open-source vector table-style vector store with persistence
 - **Sentence Transformers**: Sentence-BERT for semantic search

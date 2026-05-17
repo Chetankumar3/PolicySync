@@ -19,7 +19,7 @@ try:
         logger.info(f"  - {doc.get('source')}: {doc.get('title', 'N/A')[:60]}")
     
     if docs:
-        logger.info("\nInitializing ChromaDB...")
+        logger.info("\nInitializing LanceDB...")
         db = initialize_db()
         
         logger.info("Ingesting first document...")

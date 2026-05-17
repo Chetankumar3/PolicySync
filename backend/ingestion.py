@@ -1,8 +1,7 @@
 """
-Ingestion pipeline: chunking, embedding, and indexing to ChromaDB
+Ingestion pipeline: chunking, embedding, and indexing to LanceDB
 """
-import chromadb
-from chromadb.config import Settings
+import lancedb
 import json
 import os
 from typing import List, Dict, Any
@@ -10,47 +9,59 @@ from datetime import datetime
 import logging
 from sentence_transformers import SentenceTransformer
 import hashlib
+from lancedb.pydantic import LanceModel, Vector
 
 logger = logging.getLogger(__name__)
 
 # Initialize embedding model
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
 
+# --- DEFINED STRICT SCHEMA FOR LANCEDB ---
+class MetadataSchema(LanceModel):
+    source: str
+    url: str
+    date: str
+    chunk_index: int
+    total_chunks: int
+    ingestion_time: str
+
+class DocumentSchema(LanceModel):
+    id: str
+    vector: Vector(384) # 384 matches 'all-MiniLM-L6-v2' output dimension
+    text: str
+    metadata: MetadataSchema
+# -----------------------------------------
+
 def initialize_db():
-    """Initialize ChromaDB with two collections: active_index and archive_index"""
+    """Initialize LanceDB with two tables: active_index and archive_index"""
     try:
-        # Create persistent ChromaDB directory
-        os.makedirs("./chroma_store", exist_ok=True)
+        # Create persistent LanceDB directory
+        os.makedirs("./lancedb_store", exist_ok=True)
+
+        # Initialize LanceDB
+        db = lancedb.connect("./lancedb_store")
+
+        # Create or open tables
+        active_collection = get_or_create_table(db, "active_index")
+        archive_collection = get_or_create_table(db, "archive_index")
         
-        # Initialize ChromaDB with persistence
-        settings = Settings(
-            chroma_db_impl="duckdb+parquet",
-            persist_directory="./chroma_store",
-            anonymized_telemetry=False,
-        )
+        logger.info(f"LanceDB initialized with tables:")
+        logger.info(f"  - active_index: {active_collection.count_rows()} documents")
+        logger.info(f"  - archive_index: {archive_collection.count_rows()} documents")
         
-        client = chromadb.Client(settings)
-        
-        # Create or get collections
-        active_collection = client.get_or_create_collection(
-            name="active_index",
-            metadata={"description": "Current active regulatory documents"}
-        )
-        
-        archive_collection = client.get_or_create_collection(
-            name="archive_index",
-            metadata={"description": "Historical or superseded documents"}
-        )
-        
-        logger.info(f"ChromaDB initialized with collections:")
-        logger.info(f"  - active_index: {active_collection.count()} documents")
-        logger.info(f"  - archive_index: {archive_collection.count()} documents")
-        
-        return client
+        return db
     
     except Exception as e:
-        logger.error(f"Error initializing ChromaDB: {e}")
+        logger.error(f"Error initializing LanceDB: {e}")
         raise
+
+def get_or_create_table(db, table_name: str):
+    """Open an existing LanceDB table or create it if missing."""
+    try:
+        return db.open_table(table_name)
+    except Exception:
+        # Passed the schema to allow creating an empty table
+        return db.create_table(table_name, schema=DocumentSchema)
 
 def chunk_text(text: str, chunk_size: int = 512, overlap: int = 50) -> List[str]:
     """
@@ -95,7 +106,7 @@ def ingest_document(
     document_date: str = None
 ) -> Dict[str, Any]:
     """
-    Ingest a document: chunk, embed, and upsert to ChromaDB
+    Ingest a document: chunk, embed, and insert to LanceDB
     """
     if not db:
         raise ValueError("Database not initialized")
@@ -106,47 +117,37 @@ def ingest_document(
     try:
         logger.info(f"Ingesting document: {source_name}")
         
-        # Get active collection
-        active_collection = db.get_or_create_collection("active_index")
-        
+        # Get active table
+        active_table = get_or_create_table(db, "active_index")
+
         # Chunk the document
         chunks = chunk_text(text)
         logger.info(f"Created {len(chunks)} chunks from {source_name}")
-        
-        ingested_count = 0
-        
-        # Process each chunk
+
+        records = []
         for idx, chunk in enumerate(chunks):
             chunk_id = generate_chunk_id(chunk, source_name, idx)
-            
-            # Check if chunk already exists
-            try:
-                existing = active_collection.get(ids=[chunk_id])
-                if existing and existing['ids']:
-                    logger.debug(f"Chunk {chunk_id} already exists, skipping")
-                    continue
-            except:
-                pass
-            
-            # Embed the chunk
             embedding = embed_text(chunk)
-            
-            # Upsert to active index
-            active_collection.upsert(
-                ids=[chunk_id],
-                embeddings=[embedding],
-                documents=[chunk],
-                metadatas=[{
+            records.append({
+                "id": chunk_id,
+                "vector": embedding,
+                "text": chunk,
+                "metadata": {
                     "source": source_name,
                     "url": source_url,
                     "date": document_date,
                     "chunk_index": idx,
                     "total_chunks": len(chunks),
                     "ingestion_time": datetime.now().isoformat()
-                }]
-            )
-            
-            ingested_count += 1
+                }
+            })
+
+        if records:
+            # Upsert requires passing a specific key in LanceDB if updating. 
+            # Sticking to append/add functionality for typical LanceDB insertions.
+            active_table.add(records)
+
+        ingested_count = len(records)
         
         logger.info(f"Successfully ingested {ingested_count} new chunks from {source_name}")
         
@@ -165,17 +166,15 @@ def ingest_document(
 def get_collection_stats(db):
     """Get statistics for both collections"""
     try:
-        active = db.get_or_create_collection("active_index")
-        archive = db.get_or_create_collection("archive_index")
+        active = get_or_create_table(db, "active_index")
+        archive = get_or_create_table(db, "archive_index")
         
         return {
             "active_index": {
-                "count": active.count(),
-                "metadata": active.metadata
+                "count": active.count_rows()
             },
             "archive_index": {
-                "count": archive.count(),
-                "metadata": archive.metadata
+                "count": archive.count_rows()
             }
         }
     except Exception as e:

@@ -11,8 +11,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-RETENTION_LOG_FILE = "./chroma_store/retention_log.json"
-DRIFT_LOG_FILE = "./chroma_store/drift_log.json"
+RETENTION_LOG_FILE = "./lancedb_store/retention_log.json"
+DRIFT_LOG_FILE = "./lancedb_store/drift_log.json"
 
 # Benchmark questions for retention testing
 BENCHMARK_QUESTIONS = [

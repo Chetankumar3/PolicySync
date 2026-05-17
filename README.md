@@ -41,7 +41,7 @@ policysync/
 │   ├── conflict.py          ← Conflict detection (day 2+)
 │   ├── requirements.txt     ← Python dependencies
 │   ├── test_pipeline.py     ← Integration test
-│   └── chroma_store/        ← Persistent ChromaDB storage
+│   └── lancedb_store/        ← Persistent LanceDB storage
 ├── frontend/
 │   ├── src/
 │   │   ├── App.jsx
@@ -69,9 +69,9 @@ policysync/
 
 ## 🛠️ Tech Stack
 
-- **Backend**: FastAPI 0.104 + ChromaDB 0.4.18 + APScheduler 3.10.4
+- **Backend**: FastAPI 0.104 + LanceDB + APScheduler 3.10.4
 - **Embeddings**: sentence-transformers (all-MiniLM-L6-v2) - runs locally
-- **Vector DB**: ChromaDB with persistent storage (active_index + archive_index)
+- **Vector DB**: LanceDB with persistent storage (active_index + archive_index)
 - **LLM**: Groq API (llama-3.3-70b-versatile)
 - **Frontend**: React 18 + Vite + Recharts
 - **Data Sources**: RBI website (real-time scraping)
@@ -109,7 +109,7 @@ python main.py
 ```
 
 The backend will start on `http://localhost:8000` and:
-- Initialize ChromaDB with two collections (active_index, archive_index)
+- Initialize LanceDB with two tables (active_index, archive_index)
 - Start APScheduler to fetch RBI data every 8 hours
 - Fetch initial RBI data immediately on startup
 

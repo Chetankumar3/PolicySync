@@ -1,4 +1,4 @@
-# Continual RAG Agent - 4-Hour Submission Summary
+# PolicySync - 4-Hour Submission Summary
 
 ## 🎯 Mission Accomplished
 
@@ -104,7 +104,7 @@ Chunking (512 chars, 50-char overlap)
     ↓
 Embedding (all-MiniLM-L6-v2)
     ↓
-Upsert to ChromaDB
+Insert to LanceDB
     ↓
 Run Retention Tests
     ↓
@@ -156,7 +156,7 @@ Then visit: **http://localhost:5173**
 
 - **Catastrophic Forgetting** (ML/AI concept) → Retention Tester solves it
 - **Distribution Shift** (MLOps concept) → Drift Monitor solves it
-- **Vector Databases** → ChromaDB dual-index design
+- **Vector Databases** → LanceDB dual-index design
 - **Incremental Learning** → Only new docs processed
 - **Re-ranking Strategies** → Multi-factor scoring formula
 - **Real-time Data** → RBI scrapers with APScheduler
@@ -180,7 +180,7 @@ The backend ingests real RBI regulatory data every 8 hours. The frontend shows l
 ## 📋 Git Status
 
 ```
-Repository: d:\IIIT Naya Raipur\Dev\Agentic AI\continual-rag-agent
+Repository: d:\IIIT Naya Raipur\Dev\Agentic AI\PolicySync
 Commits:
   1. Initial commit: Project skeleton with FastAPI backend and React frontend
   2. Hour 3-4: Complete retriever, evaluator, frontend setup
@@ -196,14 +196,14 @@ If continued:
 
 ## ⏱️ Time Breakdown
 
-- **Hour 1**: FastAPI skeleton + ChromaDB setup + git init (✅ Done)
+- **Hour 1**: FastAPI skeleton + LanceDB setup + git init (✅ Done)
 - **Hour 2**: Cron fetcher + ingestion pipeline (✅ Done)
 - **Hour 3**: Retriever, re-ranker, evaluator, frontend components (✅ Done)
 - **Hour 4**: Documentation + final polish (✅ Done)
 
 ## ✨ Key Innovations
 
-1. **Persistent ChromaDB** with dual collections
+1. **Persistent LanceDB** with dual collections
 2. **Smart re-ranking formula** combining 3 factors
 3. **Automatic duplicate detection** via content hashing
 4. **Continuous monitoring** with retention + drift

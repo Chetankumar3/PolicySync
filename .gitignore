@@ -37,7 +37,7 @@ env/
 .DS_Store
 
 # Database
-chroma_store/
+lancedb_store/
 *.db
 *.sqlite
 *.sqlite3

@@ -7,6 +7,7 @@ from typing import List, Dict, Any
 from datetime import datetime
 from sentence_transformers import SentenceTransformer
 import numpy as np
+from ingestion import get_or_create_table
 
 logger = logging.getLogger(__name__)
 embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -22,37 +23,28 @@ def dual_path_retrieve(
     Returns results with source collection metadata
     """
     try:
-        collection = db.get_or_create_collection(collection_name)
+        table = get_or_create_table(db, collection_name)
         
         # Embed the query
         query_embedding = embedding_model.encode(query, convert_to_numpy=False)
         query_embedding = query_embedding.tolist() if hasattr(query_embedding, 'tolist') else list(query_embedding)
         
-        # Query ChromaDB
-        results = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=top_k
-        )
+        # Query LanceDB
+        results = table.search(query_embedding).limit(top_k).to_list()
         
         # Format results
         formatted_results = []
-        if results and results['ids'] and len(results['ids']) > 0:
-            for i, doc_id in enumerate(results['ids'][0]):
-                doc = results['documents'][0][i] if results['documents'] else ""
-                metadata = results['metadatas'][0][i] if results['metadatas'] else {}
-                distance = results['distances'][0][i] if results['distances'] else 1.0
-                
-                # Convert distance to similarity score (cosine distance -> similarity)
-                similarity_score = 1 - (distance / 2)  # Normalize to 0-1
-                
+        if results:
+            for item in results:
+                metadata = item.get("metadata", {}) if isinstance(item, dict) else {}
                 formatted_results.append({
-                    "id": doc_id,
-                    "text": doc,
+                    "id": item.get("id", "") if isinstance(item, dict) else "",
+                    "text": item.get("text", "") if isinstance(item, dict) else "",
                     "source": metadata.get("source", "Unknown"),
                     "url": metadata.get("url", ""),
                     "date": metadata.get("date", ""),
                     "collection": collection_name,
-                    "score": similarity_score,
+                    "score": float(item.get("score", 0.0)) if isinstance(item, dict) else 0.0,
                     "metadata": metadata
                 })
         
