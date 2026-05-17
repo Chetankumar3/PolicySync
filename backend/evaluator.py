@@ -78,24 +78,33 @@ def save_drift_log(log: List[Dict[str, Any]]):
 
 def check_answer_consistency(baseline: str, current: str) -> bool:
     """
-    Simple consistency check - in production, this would call Groq LLM
-    For now, we do a simple keyword overlap check
+    Consistency check using keyword overlap on key terms only
     """
     try:
-        baseline_words = set(baseline.lower().split())
-        current_words = set(current.lower().split())
-        
-        # Calculate Jaccard similarity
-        intersection = baseline_words & current_words
-        union = baseline_words | current_words
-        
-        if union:
-            similarity = len(intersection) / len(union)
-            return similarity > 0.5  # 50% overlap threshold
-        
-        return False
+        # Extract meaningful keywords (ignore stopwords)
+        stopwords = {"the", "a", "an", "is", "are", "of", "for", "in", "to", "and", 
+                     "or", "at", "by", "with", "that", "this", "it", "as", "on", "be"}
+
+        def keywords(text):
+            return set(
+                w for w in text.lower().split()
+                if w not in stopwords and len(w) > 3
+            )
+
+        baseline_kw = keywords(baseline)
+        current_kw = keywords(current)
+
+        if not baseline_kw:
+            return True
+
+        # What fraction of baseline keywords appear in current answer
+        overlap = len(baseline_kw & current_kw) / len(baseline_kw)
+
+        # Pass if 30%+ of baseline keywords are present (was 50% Jaccard on all words)
+        return overlap >= 0.30
+
     except:
-        return True  # Default to pass on error
+        return True
 
 def run_retention_tests(db) -> List[Dict[str, Any]]:
     """

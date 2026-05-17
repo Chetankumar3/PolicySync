@@ -52,10 +52,16 @@ def fetch_rbi_notifications() -> List[Dict[str, str]]:
         soup = BeautifulSoup(response.content, 'html.parser')
         
         # Extract text content from the page
-        main_content = soup.find("div", class_="main-content") or soup.find("div", id="content")
+        main_content = (
+            soup.find("div", class_="main-content") or
+            soup.find("div", id="content") or
+            soup.find("div", id="wrapper") or
+            soup.find("body")
+        )
         if main_content:
             text = main_content.get_text(separator="\n")
-            if text.strip():
+            text = "\n".join(line.strip() for line in text.splitlines() if line.strip())
+            if text.strip() and len(text.strip()) > 100:
                 documents.append({
                     "title": "RBI Notifications",
                     "text": text[:2000],  # Take first 2000 chars
@@ -80,10 +86,17 @@ def fetch_rbi_master_directions() -> List[Dict[str, str]]:
         soup = BeautifulSoup(response.content, 'html.parser')
         
         # Extract text content
-        main_content = soup.find("div", class_="main-content") or soup.find("div", id="content")
+        main_content = (
+            soup.find("div", class_="main-content") or
+            soup.find("div", id="content") or
+            soup.find("div", id="wrapper") or
+            soup.find("body")
+        )
         if main_content:
             text = main_content.get_text(separator="\n")
-            if text.strip():
+            text = "\n".join(line.strip() for line in text.splitlines() if line.strip())
+            
+            if text.strip() and len(text.strip()) > 100:
                 documents.append({
                     "title": "RBI Master Directions",
                     "text": text[:2000],
@@ -108,10 +121,17 @@ def fetch_rbi_press_releases() -> List[Dict[str, str]]:
         soup = BeautifulSoup(response.content, 'html.parser')
         
         # Extract text content
-        main_content = soup.find("div", class_="main-content") or soup.find("div", id="content")
+        main_content = (
+            soup.find("div", class_="main-content") or
+            soup.find("div", id="content") or
+            soup.find("div", id="wrapper") or
+            soup.find("body")
+        )
         if main_content:
             text = main_content.get_text(separator="\n")
-            if text.strip():
+            text = "\n".join(line.strip() for line in text.splitlines() if line.strip())
+
+            if text.strip() and len(text.strip()) > 100:
                 documents.append({
                     "title": "RBI Press Releases",
                     "text": text[:2000],

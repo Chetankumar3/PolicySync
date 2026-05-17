@@ -36,15 +36,39 @@ def dual_path_retrieve(
         formatted_results = []
         if results:
             for item in results:
-                metadata = item.get("metadata", {}) if isinstance(item, dict) else {}
+                if not isinstance(item, dict):
+                    item = dict(item)
+
+                # LanceDB returns distance as "_distance", not "score"
+                distance = item.get("_distance", None)
+                if distance is not None:
+                    score = max(0.0, 1.0 - float(distance) / 2.0)
+                else:
+                    score = float(item.get("score", 0.5))
+
+                # metadata may be a Pydantic model or plain dict or JSON string
+                raw_meta = item.get("metadata", {})
+                if hasattr(raw_meta, "__dict__"):
+                    metadata = vars(raw_meta)
+                elif isinstance(raw_meta, str):
+                    try:
+                        import json
+                        metadata = json.loads(raw_meta)
+                    except Exception:
+                        metadata = {}
+                elif isinstance(raw_meta, dict):
+                    metadata = raw_meta
+                else:
+                    metadata = {}
+
                 formatted_results.append({
-                    "id": item.get("id", "") if isinstance(item, dict) else "",
-                    "text": item.get("text", "") if isinstance(item, dict) else "",
+                    "id": item.get("id", ""),
+                    "text": item.get("text", ""),
                     "source": metadata.get("source", "Unknown"),
                     "url": metadata.get("url", ""),
                     "date": metadata.get("date", ""),
                     "collection": collection_name,
-                    "score": float(item.get("score", 0.0)) if isinstance(item, dict) else 0.0,
+                    "score": score,
                     "metadata": metadata
                 })
         

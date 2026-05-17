@@ -8,6 +8,9 @@ from pydantic import BaseModel
 from typing import List, Dict, Any
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
+from groq import Groq
 from datetime import datetime
 import logging
 from ingestion import initialize_db, ingest_document, get_or_create_table
@@ -15,6 +18,9 @@ from retriever import dual_path_retrieve, rerank_results
 from evaluator import run_retention_tests, get_drift_logs
 from cron_fetcher import fetch_and_ingest_new_documents
 from apscheduler.schedulers.background import BackgroundScheduler
+
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "your-groq-api-key-here")
+groq_client = Groq(api_key=GROQ_API_KEY)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -125,6 +131,7 @@ async def health_check():
         "database": "connected" if db else "disconnected"
     }
 
+
 @app.post("/query", response_model=QueryResponse)
 async def query_endpoint(request: QueryRequest):
     """Main query endpoint - retrieve and rank documents, then query LLM"""
@@ -153,8 +160,14 @@ async def query_endpoint(request: QueryRequest):
         
         # Combine and rerank
         all_results = active_results + archive_results
-        ranked_results = rerank_results(all_results, request.question)
+        ranked_results = rerank_results(all_results, request.question) if all_results else []
         
+        logger.info(f"Active results count: {len(active_results)}")
+        logger.info(f"Archive results count: {len(archive_results)}")
+        logger.info(f"Ranked results count: {len(ranked_results)}")
+        if active_results:
+            logger.info(f"Sample active result: {active_results[0]}")
+
         # Format response
         sources = [
             {
@@ -167,18 +180,46 @@ async def query_endpoint(request: QueryRequest):
             for result in ranked_results[:5]
         ]
         
-        # Build LLM response (placeholder for now)
-        confidence = float(ranked_results[0].get("score", 0.5)) if ranked_results else 0.0
-        answer = f"Based on the retrieved documents, here's the answer to your question:\n\n"
-        answer += "".join([f"• {src['source']}: {src['text'][:200]}...\n" for src in sources[:3]])
+        # Build context from top sources
+        context = "\n\n".join(
+            f"[{src['source']} | {src['date']}]\n{src['text']}"
+            for src in sources
+        )
         
+        # Call Groq LLM
+        try:
+            chat_response = groq_client.chat.completions.create(
+                model="llama-3.3-70b-versatile",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are a banking regulatory expert. Answer questions using only "
+                            "the provided context. If the context doesn't contain enough information, "
+                            "say so clearly. Be concise and cite sources."
+                        )
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Context:\n{context}\n\nQuestion: {request.question}"
+                    }
+                ],
+                max_tokens=512,
+                temperature=0.2,
+            )
+            answer = chat_response.choices[0].message.content
+        except Exception as llm_err:
+            logger.error(f"LLM call failed: {llm_err}")
+            answer = f"Retrieved {len(sources)} sources but could not generate an answer: {llm_err}"
+    
+        confidence = float(ranked_results[0].get("score", 0.0)) if ranked_results else 0.0
+
         return QueryResponse(
             answer=answer,
             sources=sources,
             confidence=confidence,
             timestamp=datetime.now().isoformat()
         )
-    
     except Exception as e:
         logger.error(f"Query error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
