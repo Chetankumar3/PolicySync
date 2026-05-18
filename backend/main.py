@@ -17,6 +17,7 @@ from ingestion import initialize_db, ingest_document, get_or_create_table
 from retriever import dual_path_retrieve, rerank_results
 from evaluator import run_retention_tests, get_drift_logs
 from cron_fetcher import fetch_and_ingest_new_documents
+from query_history import init_query_history_db, save_query, get_query_history, clear_query_history
 from apscheduler.schedulers.background import BackgroundScheduler
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "your-groq-api-key-here")
@@ -35,40 +36,51 @@ last_fetch_time = None
 async def lifespan(app: FastAPI):
     """Lifecycle manager for startup and shutdown events"""
     global db, scheduler, last_fetch_time
-    
-    # --- STARTUP LOGIC ---
+ 
+    # --- STARTUP ---
     logger.info("Starting up PolicySync...")
-    
-    # Initialize LanceDB
+ 
     db = initialize_db()
     logger.info("LanceDB initialized")
-    
-    # Initialize scheduler
+ 
+    init_query_history_db()
+    logger.info("Query history database initialized")
+ 
     scheduler = BackgroundScheduler()
     scheduler.start()
-    
-    # Schedule data fetcher to run every 8 hours
+ 
     scheduler.add_job(
         fetch_and_ingest_new_documents,
         "interval",
         hours=8,
         id="rbi_fetcher"
     )
-    
-    # Fetch initial data on startup
-    logger.info("Fetching initial RBI data...")
+ 
+    # Seed from local HTML files if DB is empty
+    from ingestion import get_or_create_table
+    from cron_fetcher import seed_baseline_documents
+    active_table = get_or_create_table(db, "active_index")
+ 
+    if active_table.count_rows() == 0:
+        logger.info("DB is empty — seeding from local HTML files in backend/sources/...")
+        seed_baseline_documents(db)
+        logger.info("Seeding complete")
+    else:
+        logger.info(f"DB already has {active_table.count_rows()} rows, skipping seed")
+ 
+    # Run cron once to pick up any live updates
+    logger.info("Running initial live fetch for updates...")
     try:
         fetch_and_ingest_new_documents()
         last_fetch_time = datetime.now().isoformat()
-        logger.info("Initial data fetched successfully")
     except Exception as e:
-        logger.error(f"Error fetching initial data: {e}")
-    
+        logger.error(f"Error in initial fetch: {e}")
+ 
     logger.info("Startup complete")
-    
-    yield  # Application runs during this yield
-    
-    # --- SHUTDOWN LOGIC ---
+ 
+    yield
+ 
+    # --- SHUTDOWN ---
     if scheduler:
         scheduler.shutdown()
         logger.info("Scheduler shutdown")
@@ -214,6 +226,9 @@ async def query_endpoint(request: QueryRequest):
     
         confidence = float(ranked_results[0].get("score", 0.0)) if ranked_results else 0.0
 
+        # Save query to history
+        save_query(request.question, answer, confidence, sources)
+
         return QueryResponse(
             answer=answer,
             sources=sources,
@@ -313,6 +328,33 @@ async def fetch_now_endpoint():
         }
     except Exception as e:
         logger.error(f"Fetch error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/history")
+async def history_endpoint(limit: int = 50):
+    """Get query history"""
+    try:
+        history = get_query_history(limit=limit)
+        return {
+            "history": history,
+            "count": len(history),
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"History endpoint error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/history")
+async def clear_history_endpoint():
+    """Clear query history"""
+    try:
+        clear_query_history()
+        return {
+            "status": "cleared",
+            "timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        logger.error(f"Clear history endpoint error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":

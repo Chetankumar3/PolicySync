@@ -1,0 +1,75 @@
+﻿ .top_setting, .grid_7, .breadcrumbs, .grid_1,  .sidebar_nav, .sub_title, .note_text, .year, .search_bar, .pagination
+{
+    display: none;
+}
+
+
+
+#DateSettree_lbltree
+{
+    display: none !important;
+}
+#FS_Header1_imgHeader
+{
+    display: none !important;
+}
+.search_button
+{
+    display: none !important;
+}
+.search_box
+{
+    display: none !important;
+}
+.right_blue_border
+{
+    border: none !important;
+}
+.right_blue_master_border
+{
+    border: none !important;
+}
+.ticker
+{
+    display: none !important;
+}
+.content_area
+{
+    border-left: #ffffff solid 0px;
+    border-right: #ffffff solid 0px;
+}
+.breadcrumbs
+{
+    display: none !important;
+}
+a:link:after, a:visited:after
+{
+    content: "";
+}
+
+.footertext
+{
+    display: none !important;
+}
+.copyright
+{
+    display: none !important;
+}
+@media print
+{
+    a[href]:after
+    {
+        display: none;
+    }
+}
+@media screen
+{
+    a
+    {
+        display: inline;
+    }
+}
+blockquote
+{
+border:0px!important;    
+}

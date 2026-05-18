@@ -1,0 +1,1487 @@
+body
+{
+    min-width: 960px;
+}
+.container_12
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 1080px;
+}
+.grid_subtree, .grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12
+{
+    display: inline;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.push_1, .pull_1, .push_2, .pull_2, .push_3, .pull_3, .push_4, .pull_4, .push_5, .pull_5, .push_6, .pull_6, .push_7, .pull_7, .push_8, .pull_8, .push_9, .pull_9, .push_10, .pull_10, .push_11, .pull_11
+{
+    position: relative;
+}
+.alpha
+{
+    margin-left: 0;
+}
+.omega
+{
+    margin-right: 0;
+}
+.grid_tree
+{
+    width: auto;
+}
+.container_12 .grid_subtree
+{
+    width: 69px;
+}
+
+/* grid measurement ratio*/
+.container_12 .grid_1
+{
+    width: 87px;
+}
+.container_12 .grid_2
+{
+    width: 176px;
+}
+.container_12 .grid_3
+{
+    width: 240px;
+}
+.container_12 .grid_4
+{
+    width: 353px;
+}
+.container_12 .grid_5
+{
+    width: 441px;
+}
+.container_12 .grid_6
+{
+    width: 535px;
+}
+
+.container_12 .grid_7
+{
+    width: 618px;
+}
+.container_12 .grid_8
+{
+    width: 709px;
+}
+.container_12 .grid_9
+{
+    width: 795px;
+}
+.container_12 .grid_10
+{
+    width: 883px;
+}
+.container_12 .grid_11
+{
+    width: 961px;
+}
+.container_12 .grid_12
+{
+    width: 1060px;
+}
+
+/* end grid measurement ratio*/
+
+.container_12 .prefix_1
+{
+    padding-left: 80px;
+}
+.container_12 .prefix_2
+{
+    padding-left: 160px;
+}
+.container_12 .prefix_3
+{
+    padding-left: 240px;
+}
+.container_12 .prefix_4
+{
+    padding-left: 320px;
+}
+.container_12 .prefix_5
+{
+    padding-left: 400px;
+}
+.container_12 .prefix_6
+{
+    padding-left: 480px;
+}
+.container_12 .prefix_7
+{
+    padding-left: 560px;
+}
+.container_12 .prefix_8
+{
+    padding-left: 640px;
+}
+.container_12 .prefix_9
+{
+    padding-left: 720px;
+}
+.container_12 .prefix_10
+{
+    padding-left: 800px;
+}
+.container_12 .prefix_11
+{
+    padding-left: 880px;
+}
+.container_12 .suffix_1
+{
+    padding-right: 80px;
+}
+.container_12 .suffix_2
+{
+    padding-right: 160px;
+}
+.container_12 .suffix_3
+{
+    padding-right: 240px;
+}
+.container_12 .suffix_4
+{
+    padding-right: 320px;
+}
+.container_12 .suffix_5
+{
+    padding-right: 400px;
+}
+.container_12 .suffix_6
+{
+    padding-right: 480px;
+}
+.container_12 .suffix_7
+{
+    padding-right: 560px;
+}
+.container_12 .suffix_8
+{
+    padding-right: 640px;
+}
+.container_12 .suffix_9
+{
+    padding-right: 720px;
+}
+.container_12 .suffix_10
+{
+    padding-right: 800px;
+}
+.container_12 .suffix_11
+{
+    padding-right: 880px;
+}
+.container_12 .push_1
+{
+    left: 80px;
+}
+.container_12 .push_2
+{
+    left: 160px;
+}
+.container_12 .push_3
+{
+    left: 240px;
+}
+.container_12 .push_4
+{
+    left: 320px;
+}
+.container_12 .push_5
+{
+    left: 400px;
+}
+.container_12 .push_6
+{
+    left: 480px;
+}
+.container_12 .push_7
+{
+    left: 560px;
+}
+.container_12 .push_8
+{
+    left: 640px;
+}
+.container_12 .push_9
+{
+    left: 720px;
+}
+.container_12 .push_10
+{
+    left: 800px;
+}
+.container_12 .push_11
+{
+    left: 880px;
+}
+.container_12 .pull_1
+{
+    left: -80px;
+}
+.container_12 .pull_2
+{
+    left: -160px;
+}
+.container_12 .pull_3
+{
+    left: -240px;
+}
+.container_12 .pull_4
+{
+    left: -320px;
+}
+.container_12 .pull_5
+{
+    left: -400px;
+}
+.container_12 .pull_6
+{
+    left: -480px;
+}
+.container_12 .pull_7
+{
+    left: -560px;
+}
+.container_12 .pull_8
+{
+    left: -640px;
+}
+.container_12 .pull_9
+{
+    left: -720px;
+}
+.container_12 .pull_10
+{
+    left: -800px;
+}
+.container_12 .pull_11
+{
+    left: -880px;
+}
+.clear
+{
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+.clearfix:before, .clearfix:after, .container_12:before, .container_12:after
+{
+    content: '.';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    width: 0;
+    height: 0;
+}
+.clearfix:after, .container_12:after
+{
+    clear: both;
+}
+.clearfix, .container_12
+{
+    zoom: 1;
+}
+.sidebar_right_nav ul li
+{
+    border-bottom: #205DB1 solid 1px;
+    line-height: 20px;
+}
+.sidebar_right_nav ul li a
+{
+    text-decoration: none;
+    color: #000;
+}
+.right_blue_master_border
+{
+    border-right: #0469A3 solid 1px;
+    padding-right: 10px;
+    min-height: 1260px;
+}
+.selected_date_style a
+{
+    text-decoration: underline !important;
+    color: #205DB1 !important;
+    font-weight: bold;
+}
+#btnGo
+{
+    margin: 0;
+}
+/*@font-face {
+    font-family: 'oswaldbold';
+    src: url('/Styles/oswald-bold-webfont.eot');
+    src: url('/Styles/oswald-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Styles/oswald-bold-webfont.woff') format('woff'),
+         url('/Styles/oswald-bold-webfont.ttf') format('truetype'),
+         url('/Styles/oswald-bold-webfont.svg#oswaldbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'oswaldlight';
+    src: url('/Styles/oswald-light-webfont.eot');
+    src: url('/Styles/oswald-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Styles/oswald-light-webfont.woff') format('woff'),
+         url('/Styles/oswald-light-webfont.ttf') format('truetype'),
+         url('/Styles/oswald-light-webfont.svg#oswaldlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'oswaldregular';
+    src: url('/Styles/oswald-regular-webfont.eot');
+    src: url('/Styles/oswald-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/Styles/oswald-regular-webfont.woff') format('woff'),
+         url('/Styles/oswald-regular-webfont.ttf') format('truetype'),
+         url('/Styles/oswald-regular-webfont.svg#oswaldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}*/
+
+/* link styles for languages*/
+.lnk-language
+{
+    text-decoration: underline;
+    color: blue !important;
+}
+
+/*for accordian menu home page*/
+.accordionButton
+{
+    background: url("/images/accordion_on.gif") no-repeat scroll 218px 10px rgb(29, 85, 164); /*rgb(32, 93, 177) by ni*/
+    border-bottom: 1px solid rgb(204, 204, 204);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    padding: 5px 39px 5px 10px;
+    width: 195px;
+}
+
+
+.on
+{
+    background: #dd9435 url(/images/accordion_off.gif) no-repeat scroll 218px 10px;
+    border-bottom: 1px solid #dd9435;
+    padding: 5px 39px 5px 10px;
+    color: #fff;
+}
+.over
+{
+    background: #dd9435 url(/images/accordion_mo.gif) no-repeat scroll 218px 10px;
+    color: #fff;
+}
+.accordionContent
+{
+    width: 224px;
+    border-bottom: 2px solid #CCC;
+    line-height: 22px;
+    padding: 10px; /*background: #DD9435;*/ /*background: #ffe4b7;*/
+    background: rgb(247, 232, 213) !important;
+    color: black;
+    float: left;
+    _float: none; /* Float works in all browsers but IE6 */
+}
+.accordionContent ul.accordionlist
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.accordionContent ul.accordionlist li
+{
+    list-style-position: inside;
+    padding: 0 0 0 0 !important;
+    border-bottom: #ccc dotted 1px;
+    line-height: 20px;
+    color: #ffffff;
+    text-indent: 5px;
+}
+.accordionContent ul.accordionlist li a
+{
+    text-decoration: none;
+    color: #000;
+}
+.accordionContent ul.accordionlist li a:hover
+{
+    text-decoration: underline;
+}
+.accordionContent ul.accordionlist li ul li
+{
+    background: #fbf6f6; /*#D4D4D4 changed by ni*/
+    padding: 0 0 0 12px !important;
+    text-indent: 0;
+    border-bottom: 1px dotted #999;
+}
+#wrapper
+{
+    width: 220px;
+}
+
+
+
+.accordionButton a
+{
+    text-decoration: none;
+    color: #FFFFFF; /*outline:none;*/
+    display: block;
+}
+.accordionButton:hover a, .accordionButton a.active, .on a
+{
+    color: #000;
+}
+
+.accordionContent table
+{
+    width: 100%;
+}
+.accordionContent table td
+{
+    border-bottom: #666 dotted 1px !important;
+	width : 50% ;
+}
+
+/*/ accordian*/
+
+/*================= Menubar ================*/
+#menubar
+{
+    margin: 0 0;
+    padding: 0 0;
+    float: left;
+}
+.menuButtonDrop
+{
+    float: left;
+    _float: none; /* Float works in all browsers but IE6 */
+    background: #205db1 url(/images/accordion_on.gif) 209px 10px no-repeat;
+    border-bottom: 1px solid #cccccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: #FFF;
+    cursor: pointer;
+}
+.menuButtonDrop:hover
+{
+    background: #dd9435 url(/images/accordion_mo.gif) 209px 10px no-repeat;
+    color: #000;
+}
+.menuButton
+{
+    float: left;
+    _float: none; /* Float works in all browsers but IE6 */
+    background: #205db1;
+    border-bottom: 1px solid #cccccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: #FFF;
+    cursor: pointer;
+}
+.menuButtonDrop, .menuButton, #menubar .on
+{
+    padding: 5px 15px 5px 10px;
+    width: 204px;
+}
+.menuButton:hover
+{
+    background: #dd9435;
+    color: #000;
+}
+.menuButton a,.menuButtonDrop a
+{
+    text-decoration: none;
+    color: rgb(255, 255, 255) !important;
+    display: block;
+    border: none;
+    /*outline: none;  commented by ni*/
+}
+.menuButton a:hover
+{
+    color: #000 !important;
+}
+#menubar .on
+{
+    background: url("/images/accordion_off.gif") no-repeat scroll 209px 10px #DD9435 !important;
+    border-bottom: 1px solid #DD9435;
+    color: #000000;
+}
+
+.submenu
+{
+    width: 229px;
+    border-bottom: 2px solid #cccccc;
+    line-height: 22px;
+    margin: 0 0;
+    padding: 0 0;
+    background: #dd9435;
+    color: #000000;
+    float: left;
+    _float: none; /* Float works in all browsers but IE6 */
+}
+.submenu ul
+{
+    margin: 0;
+    padding: 0;
+}
+.submenu ul li
+{
+    list-style: none;
+    list-style-position: inside;
+    border-bottom: #CCC dotted 0x;
+    line-height: 16px;
+    margin: 0 0;
+    padding: 0 0;
+    border-bottom: 1px dotted rgb(204, 204, 204);
+}
+
+.submenu ul li ul li
+{
+    border-bottom: 1px dotted rgb(204, 204, 204);
+}
+
+
+.submenu ul li a
+{
+    display: block;
+    margin: 10px 0;
+    padding: 0 0 0 16px;
+    text-decoration: none;
+    color: Black;
+}
+.submenu ul li a:hover
+{
+    text-decoration: underline;
+}
+.submenu ul li ul
+{
+    margin: 0 0;
+    padding: 0 0;
+}
+.submenu ul li ul li
+{
+    margin: 0 0; /*padding:0 0 0 10px;*/
+    text-indent: 15Px;
+    border-bottom: #CCC dotted 1px; /*border-bottom:1px solid red;*/
+}
+.submenu ul li ul li ul li
+{
+    /*border:none;*/
+    text-indent: 35px;
+}
+
+
+.tabelbg .links
+{
+    color: rgb(0,102, 238) !important;
+}
+/*================== Menubar ================*/
+/*================== Menubar ================*/
+
+/*Added for Functionwise banner - Bishwajit Kumar*/
+/*Start*/
+
+.banner2
+{
+    background: none repeat scroll 0 0;
+    height: 109px !important;
+    margin-bottom: 10px;
+}
+.banner2 .img2
+{
+    float: left;
+    height: 109px;
+    padding: 0 10px 0 0;
+    width: 233px;
+}
+.banner2 p
+{
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0;
+    padding: 0 25px 0px 0px;
+    text-align: justify;
+}
+
+.banner2 h1
+{
+    font-size: 20px;
+    margin: 0;
+    padding: 10px 0 1px;
+    text-transform: uppercase;
+}
+/*End*/
+/*Manoj*/
+#annualPolicy table table
+{
+    background-color: transparent !important /*background:white!important;border-color:red!important; */;
+}
+#annualPolicy table table td
+{
+    border: solid 1px #efd1aa !important; /*background:white!important;border-color:red!important; */
+}
+#BankingIndicatorsDisplay p
+{
+    padding: 0 5px !important;
+    margin: 5px 0 !important;
+}
+.tablebg th
+{
+    border: solid 1px #efd1aa !important;
+    background: #f7e8d5;
+    padding: 3px;
+}
+
+.tablebg td a
+{
+    text-decoration: none;
+}
+
+/*.tablebg td a {text-decoration: none}*/
+.tablebg a
+{
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    line-height: 20px;
+    text-decoration: none !important; /* padding-left: 5px; */
+}
+.tablebg a:hover
+{
+    color: rgb(0, 102, 238) !important;
+    text-decoration: underline !important;
+}
+
+#annual table
+{
+    background-color: transparent !important;
+    border-collapse: collapse;
+}
+#tblFixed table
+{
+    word-wrap: break-word;
+    border-collapse: collapse;
+    width: 100% !important;
+}
+/*.table_calendar{border:1px solid rgb(239, 209, 170)!important; padding:10px}*/
+.table_calendar td
+{
+    font-weight: bold;
+    text-align: left;
+    width: 100px;
+}
+.table_calendar td .year_range
+{
+    border: 1px solid rgb(187, 187, 187);
+    display: inline-block;
+    font-weight: bold;
+    line-height: 22px;
+    margin: 0 auto 7px;
+    min-width: 185px;
+    padding: 0;
+    width: auto;
+}
+/*Manoj End*/
+
+/*MMO css modification saurabh*/
+/*.tablecontent1 { background-color: #fcf5ec; border: 1px solid #fff; color:#000!important;}*/
+.brd-ptable1
+{
+    border: 1px solid rgb(239, 209, 170);
+    border-collapse: collapse !important;
+}
+.brd-ptable1 th
+{
+    border: solid 1px #efd1aa !important;
+    background: #f7e8d5;
+    padding: 3px;
+    color: #000 !important;
+}
+.brd-ptable1 td
+{
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.brd-ptable1 .table
+{
+    background-color: #fcf5ec !important;
+    border: 1px solid #fff !important;
+    color: #000 !important;
+}
+.brd-ptable1 tr td table tr td
+{
+    background-color: #fcf5ec !important;
+    border: 1px solid #fff !important;
+    color: #000 !important;
+}
+.tablecontent2 .paraheader
+{
+    color: rgb(38, 100, 145) !important;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #f7e8d5 !important;
+}
+.brd-ptable1 tr td table tr td p
+{
+    margin: 0 !important;
+}
+.brd-ptable1 .table p
+{
+    margin: 0 !important;
+}
+
+
+/*Regulations and supervision*/
+
+.commBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+    color:#ffffff;
+}
+.commBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+.commBankingSubSection li a
+{
+    color: #072651 !important;
+}
+
+.commBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+}
+.commBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+}
+
+
+
+.coopBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+    color:#ffffff;
+}
+.coopBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+}
+.coopBankingSubSection li a
+{
+    color: #072651 !important;
+}
+
+.nonBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+    color:#ffffff;
+}
+.nonBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+}
+.nonBankingSubSection li a
+{
+    color: #072651 !important;
+}
+
+.finMarketPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+}
+.finMarketMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px RGB(27, 86, 166);/*#205DB1 by ni*/
+    cursor: pointer;
+}
+.finMarketSubSection li a
+{
+    color: #072651 !important;
+}
+
+.noBorder
+{
+    border: 0 !important;
+}
+.txtBold
+{
+    font-weight: bold;
+    color: #fff;
+}
+#CB > span:hover
+{
+    color: #fff;
+}
+#COPB > span:hover
+{
+    color: #fff;
+}
+#NB > span:hover
+{
+    color: #fff;
+}
+#RFM > span:hover
+{
+    color: #fff;
+}
+
+.supCommBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+.supCommBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+
+
+.supCoopBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+.supCoopBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+
+.supNonBankingPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+.supNonBankingMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 5px;
+    cursor: pointer;
+}
+
+/* For sliding menus in ic_currency page by Sandeep START */
+.coinagePlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.coinageMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.britishIndiaPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.britishIndiaMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.paperMoneyPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.paperMoneyMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.otherIssuesPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.otherIssuesMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.MiscellanyPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.MiscellanyMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.bankNotesNewSeriesPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.bankNotesNewSeriesMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.SpecifiedbankNotesPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.SpecifiedbankNotesMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.bankNotesPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.bankNotesMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.typesofCoinsPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.typesofCoinsMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.currentVacanciesPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.currentVacanciesMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.postBasedRostersPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.postBasedRostersMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.rostersAtCOPlus
+{
+    background: url("/images/plus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+.rostersAtCOMinus
+{
+    background: url("/images/minus_Home.png") no-repeat scroll 212px 12px;
+    cursor: pointer;
+}
+
+.Spacing
+{
+    margin: 10px 0;
+    padding: 0 0 0 16px;
+    line-height: 33px;
+}
+
+.onBulletinLeftMenu
+{
+    background: no-repeat scroll 218px 10px #dd9435;
+    border-bottom: 1px solid #dd9435;
+    color: #fff;
+}
+.onBulletinLeftMenuRemove
+{
+    border-bottom: 1px solid #dd9435;
+    color: #fff;
+}
+
+/* for sliding TOP */
+.scrollToTop
+{
+    position: fixed;
+    bottom: 2em;
+    right: 10px;
+    bottom: 226px;
+    text-decoration: none;
+    color: #ffffff !important; /*background-color: rgba(235, 235, 235, 0.80);*/
+    background: none repeat scroll 0 0 #205db1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 1em;
+    display: none;
+}
+
+tr
+{
+    height: auto !important;
+}
+
+.Link2
+{
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: rgb(0, 0, 0) !important;
+    line-height: 20px;
+    text-decoration: none !important;
+}
+
+.left
+{
+    float: left;
+    margin-left: 0px;
+    padding-left: 140px;
+    width: 250px;
+}
+
+.right
+{
+    float: right;
+    width: 250px;
+    padding-right: 120px;
+}
+
+/* .tablebg li {list-style: inside;}*/
+
+/*.scrollToTop{
+	width:100px; 
+	height:130px;
+	padding:10px; 
+	text-align:center; 
+	background: whiteSmoke;
+	font-weight: bold;
+	color: #444;
+	text-decoration: none;
+	position:fixed;
+	top:75px;
+	right:40px;
+	display:none;
+	background: url('arrow_up.png') no-repeat 0px 20px;
+}
+.scrollToTop:hover{
+	text-decoration:none;
+}*/
+
+/* Sandeep END */
+
+/*Links Css changes*/
+.tablebg td a.links:visited
+{
+    color: #0000FF !important;
+}
+.tablebg td a.links:hover
+{
+    text-decoration: underline !important;
+    color: #0000FF !important;
+}
+
+
+hr
+{
+    background: grey;
+    border: currentColor;
+    border-image: none;
+    height: 1px;
+}
+
+#divPadding > table
+{
+    margin: auto;
+}
+
+.td table .td
+{
+    border: 1px solid #efd1aa !important;
+}
+
+.pointerClass
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.padleft
+{
+    margin-left: 20px;
+}
+
+.padleft10
+{
+    margin-left: 10px;
+}
+
+.padleft20
+{
+    margin-left: 20px;
+}
+
+/*#annual .mar_top10 table{width:700px;}*/
+
+.borderAutocomplete
+{
+    border-bottom: 1px solid #efd1aa;
+}
+
+/*Feedback pop-up */
+
+#mask
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    background-color: #000;
+    display: none;
+    opacity: 0.69;
+}
+
+#boxes .window
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 200px;
+    display: none;
+    z-index: 9999;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#boxes #dialog
+{
+    width: 612px;
+    height: 250px;
+    padding: 10px;
+    background-color: #F2EDD7;
+    font-family: 'Segoe UI Light' , sans-serif;
+    font-size: 15pt;
+}
+
+#popupfoot
+{
+    position: absolute; /*bottom: 194px;*/
+    width: 250px;
+    left: 445px;
+}
+
+.close
+{
+    cursor: pointer;
+}
+.feedback
+{
+    margin-top: 18px;
+}
+.feedbacktd
+{
+    font-size: 15px !important;
+    text-align: justify;
+}
+/*#feedbackbtn a 
+{
+    bottom:21px; 
+    color:#fff; 
+    font-size:15px; 
+    text-decoration:none; 
+    display:block; 
+    position:fixed;  
+    right:0;
+    background:#205db1; 
+    padding:7px 5px;
+    border-left-color:#060;
+    border-top-color:#090;
+    -webkit-transform: rotate(-54deg);
+    -moz-transform: rotate(-54deg);
+    -ms-transform: rotate(-54deg); 
+    }*/
+#feedbackbtn a:hover
+{
+    cursor: pointer;
+}
+.Red
+{
+    color: Red;
+}
+.submit
+{
+    background: #205db1;
+    padding: 7px 5px;
+    color: White;
+}
+
+
+
+#feedbackbtn a
+{
+    bottom: 0px;
+    position: fixed;
+    right: 0;
+}
+.footer
+{
+	position:relative;
+	/*min-width:100%;
+	float:left;
+	background: #d4d4d4 url(/images/footer_bg.gif) repeat-x top;
+	margin:20px 0 0 0;
+	padding:10px 0 0 0;
+	display:block;*/
+}
+#Recent a{color:Blue;}
+#coming_soon ul a{color:Blue !important;}
+
+
+/*Welcome note*/
+#maskWN
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    background-color: #000;
+    display: none;
+    opacity: 0.69;
+}
+
+#boxesWN .window
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 200px;
+    display: none;
+    z-index: 9999;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#boxesWN #dialogWN
+{
+    width: 738px;
+    height: 550px;
+    padding: 10px;
+    background-color: #F2EDD7;
+    font-family: 'Segoe UI Light' , sans-serif;
+    font-size: 15pt;
+   top: -402px !important;
+   left:36% !important;
+   position:absolute !important;
+   margin-left: -150px !important;
+   margin-top: -150px !important;
+}
+
+#popupfootWN
+{
+    position: absolute; /*bottom: 194px;*/
+    width: 250px;
+    left: 445px;
+}
+
+
+.WelcomeNote tr td {text-align:justify; font-size:medium !important;}
+.WelcomeNote tr td {float:left; text-align:justify; font-size:medium !important;}
+
+.tablebgcell {background-color: #E0E0E0 !important;}
+
+.close img 
+{
+  right: .3em;
+  top: .3em;
+  position: absolute;
+}
+
+.hideDetail {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+}
+
+.menuButtonNotifi
+{
+    float: left;
+    _float: none; /* Float works in all browsers but IE6 */
+    background: #205db1;
+    border-bottom: 1px solid #cccccc !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: #FFF;
+    cursor: pointer;
+}
+
+ .menuButtonNotifi, #menubar .on
+{
+    padding: 5px 15px 5px 10px;
+    width: 204px;
+}
+.menuButtonNotifi:hover
+{
+    background: #dd9435;
+    color: #000;
+}
+.menuButtonNotifi
+{
+    text-decoration: none;
+    color: rgb(255, 255, 255) !important;
+    display: block;
+    border: none;
+    outline: none;
+}
+.menuButtonNotifi a:hover
+{
+    color: #000 !important;
+}
+
+.menuButtonNotifi a {
+  text-decoration: none;
+  color: rgb(255, 255, 255) !important;
+  display: block;
+  border: none;
+  outline: none;
+}
+
+.tableheader
+{
+    font-weight:bold;
+}
+.searchtxt{
+	color:#605B5B;
+	width:157px;
+	height:21px;
+	background:#fff;
+	margin: -2px 0 8px 30px;
+	padding:0 3px 0px 3px;	
+	float:left;
+	line-height:21px;
+	border:1px solid #cdcecf;
+	box-shadow:0px -2px 2px rgba(0,0,0,0.2) inset;
+	
+}
+.search_bar_speeches {
+  background: #b4b4b4;
+  width: 238px;
+  margin: 0 0;
+  padding: 0 0 10px 0!important;
+}
+.search_bar_speeches h1{
+	background:#4c4c4c;
+	font-size:14px;
+	color:#fff;
+	text-transform:uppercase;
+	font-weight:normal;
+	margin:0 0 7px 0;
+	padding:5px 5px 5px 10px;
+}
+#example-two .nav li a.hiddenTab {
+	visibility:hidden
+}
+
+#TEAcc
+{
+    display: block;
+    
+    padding: 5px 15px 10px 10px;
+    text-decoration: none;
+    color: Black;
+    float:left;
+    cursor:pointer;
+    width: 204px;
+    background: #dd9435 url(/images/accordion_mo.gif) 209px 10px no-repeat;
+    margin-top: 5px;margin-bottom: 5px;
+}
+#TEAcc a
+{
+	margin-top: 1px;margin-bottom: 4px;padding-left: -5px;
+}
+#TEAcc li
+{
+	/*background: #D4D4D4;*/
+padding: 2px 0 2px 12px !important;
+text-indent: 0;
+border-bottom: 1px dotted #999;
+margin-left: 9px;
+width: 100%;
+}
+#TEAcc li a{
+padding-left: 5px;width: 195px;
+}
+/*by ni*/
+.leftMenu{    float: left;    width: 204px;    padding: 5px 15px 5px 10px;
+    _float: none;
+    background: #205db1;
+    border-bottom: 1px solid #cccccc;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: #FFF;
+    cursor: pointer;}
+.leftMenu:hover{background: #dd9435;
+    color: #000;}
+.leftMenu a{text-decoration: none;
+    color: rgb(255, 255, 255) !important;
+    display: block;
+    }
+/*added by ni*/
+.logo{
+    margin: 10px 0 17px 0;
+}
+
+.dop_header
+{
+	border-bottom: none;
+    color: black;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: none;
+    margin-top: 0px;
+}

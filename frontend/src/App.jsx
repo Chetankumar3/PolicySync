@@ -4,6 +4,7 @@ import QueryPanel from './components/QueryPanel'
 import IngestionStatus from './components/IngestionStatus'
 import EvalDashboard from './components/EvalDashboard'
 import DriftMonitor from './components/DriftMonitor'
+import QueryHistory from './components/QueryHistory'
 
 function App() {
   const [activeTab, setActiveTab] = useState('query')
@@ -83,6 +84,14 @@ function App() {
                 Drift Monitor
               </button>
             </li>
+            <li>
+              <button
+                className={`nav-button ${activeTab === 'history' ? 'active' : ''}`}
+                onClick={() => setActiveTab('history')}
+              >
+                Query History
+              </button>
+            </li>
           </ul>
         </nav>
 
@@ -91,6 +100,7 @@ function App() {
           {activeTab === 'status' && <IngestionStatus />}
           {activeTab === 'eval' && <EvalDashboard />}
           {activeTab === 'drift' && <DriftMonitor />}
+          {activeTab === 'history' && <QueryHistory />}
         </main>
       </div>
     </div>
